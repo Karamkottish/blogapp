@@ -21,6 +21,7 @@ interface BlogItem {
   image: string;
   link: string;
   type: BlogType;
+  keywords?: string[]; 
 }
 
 export default function BlogPage() {
