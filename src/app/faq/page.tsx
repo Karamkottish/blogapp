@@ -16,6 +16,7 @@ const IconMap = {
   HelpCircle: Icons.HelpCircle,
 } as const;
 
+type IconKey = keyof typeof IconMap;
 export default function FAQPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -93,7 +94,9 @@ export default function FAQPage() {
           if (selectedCategory !== "All" && selectedCategory !== category.title)
             return null;
 
-          const Icon = IconMap[category.icon] ?? Icons.HelpCircle;
+          const Icon =
+  IconMap[category.icon as IconKey] || Icons.HelpCircle;
+
 
           return (
             <div key={category.title} className="mb-10">
