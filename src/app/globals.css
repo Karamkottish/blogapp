@@ -1,15 +1,14 @@
+/* ============================================================
+   TAILWIND IMPORT
+   ============================================================ */
 @import "tailwindcss";
 
+/* ============================================================
+   LIGHT + DARK THEME ROOT VARIABLES
+   ============================================================ */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +18,388 @@
   }
 }
 
+/* Tailwind inline theme mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ============================================================
+   GLOBAL BODY STYLING
+   ============================================================ */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ============================================================
+   PAWSPALCONNECT: SPLASH SCREEN BASE
+   ============================================================ */
+.splash-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #7a4a22, #2e1a0f 80%);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.splash-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Logo wrapper breathing animation */
+.logo-wrapper {
+  animation: breathing 2s ease-in-out infinite;
+}
+
+/* Breathing effect */
+@keyframes breathing {
+  0%   { transform: scale(1);     filter: drop-shadow(0 0 10px #b87333); }
+  50%  { transform: scale(1.08);  filter: drop-shadow(0 0 20px #ffb76b); }
+  100% { transform: scale(1);     filter: drop-shadow(0 0 10px #b87333); }
+}
+
+/* Logo shimmer + fade-in */
+.splash-logo {
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out forwards,
+             shimmer 2s ease-in-out infinite;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Metallic shimmer */
+@keyframes shimmer {
+  0%   { filter: drop-shadow(0 0 6px #6e4622); }
+  50%  { filter: drop-shadow(0 0 22px #ffcf9f); }
+  100% { filter: drop-shadow(0 0 6px #6e4622); }
+}
+
+/* ============================================================
+   PAWSPALCONNECT: UPGRADED SPLASH SCREEN
+   ============================================================ */
+.ppc-splash {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #7a4a22, #1a0f08 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 1;
+  transition: opacity 1.2s ease-out;
+}
+
+.ppc-fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Enhanced breathing glow */
+.ppc-logo-wrapper {
+  animation: ppc-breathing 2.8s ease-in-out infinite;
+}
+
+@keyframes ppc-breathing {
+  0%   { transform: scale(1);     filter: drop-shadow(0 0 12px #b87333); }
+  50%  { transform: scale(1.07);  filter: drop-shadow(0 0 28px #ffce99); }
+  100% { transform: scale(1);     filter: drop-shadow(0 0 12px #b87333); }
+}
+
+/* Logo shimmer + pop */
+.ppc-logo {
+  opacity: 0;
+  animation: ppc-shimmer 2.2s ease-in-out infinite,
+             ppc-pop 1.4s ease-out forwards;
+}
+
+@keyframes ppc-pop {
+  0%   { opacity: 0; transform: scale(0.7); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ppc-shimmer {
+  0%   { filter: drop-shadow(0 0 10px #6e4622); }
+  50%  { filter: drop-shadow(0 0 35px #ffdfb5); }
+  100% { filter: drop-shadow(0 0 10px #6e4622); }
+}
+
+/* ============================================================
+   FLOATING PAW PARTICLES BACKGROUND
+   ============================================================ */
+.ppc-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'>\
+<text x='0' y='30' font-size='28'>🐾</text></svg>"
+  );
+  background-repeat: repeat;
+  animation: pawFloat 18s linear infinite;
+  opacity: 0.22;
+}
+
+@keyframes pawFloat {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -1200px; }
+}
+
+/* ============================================================
+   FAQ ITEM HOVER EFFECT
+   ============================================================ */
+.faq-item:hover {
+  border-color: #ffbe7a;
+  box-shadow: 0px 0px 20px rgba(255, 180, 120, 0.2);
+}
+
+/* ============================================================
+   CUSTOM COPPER SCROLLBAR (WEBKIT + FIREFOX)
+   ============================================================ */
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a110b;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C47A3C, #b87333);
+  border-radius: 10px;
+  border: 2px solid #1a110b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFB477, #C47A3C);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C47A3C #1a110b;
+}
+/* ================================================
+   ANIMATED PAW BACKGROUND
+   ================================================ */
+
+.paw-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>\
+<text x='0' y='40' font-size='36'>🐾</text></svg>");
+  background-size: 120px;
+  animation: pawFloating 35s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pawFloating {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 -3000px; }
+}
+/* ============================================================
+   ADVANCED PAW BACKGROUND EFFECTS
+   ============================================================ */
+
+/* BASE FULLSCREEN CONTAINER */
+.paw-advanced-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Falling Paw Rain */
+.paw-rain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-y;
+  background-size: 80px;
+  animation: pawRain 18s linear infinite;
+  opacity: 0.09;
+}
+
+@keyframes pawRain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Paw Sparkle Dots */
+.paw-sparkles {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 200, 140, 0.25) 0%,
+    transparent 70%
+  );
+  background-size: 140px 140px;
+  animation: sparkleFloat 12s ease-in-out infinite alternate;
+  opacity: 0.12;
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateX(-40px) translateY(0); }
+  100% { transform: translateX(40px) translateY(-40px); }
+}
+
+/* Parallax Paw Layer */
+.paw-parallax {
+  position: absolute;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='45' height='45'><text y='34' font-size='32'>🐾</text></svg>");
+  background-size: 100px;
+  opacity: 0.07;
+  animation: parallaxDrift 25s linear infinite;
+}
+
+@keyframes parallaxDrift {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-200px, -300px, 0); }
+}
+
+/* ============================================================
+   FADE-IN FAQ CARD ANIMATION
+   ============================================================ */
+.faq-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .7s ease-out;
+}
+
+.faq-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   FLOATING “BACK TO TOP” PAW BUTTON
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  background: #c47a3c;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 18px rgba(255, 200, 150, 0.35);
+  transition: 0.25s ease;
+  transform: scale(0);
+}
+
+.back-to-top.show {
+  transform: scale(1);
+}
+
+.back-to-top:hover {
+  background: #e49854;
+  transform: scale(1.15);
+}
+/* ============================================
+   FULLSCREEN ANIMATED PAW BACKGROUND
+   ============================================ */
+
+.paw-animated-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Falling Paw Rain Layer */
+.paw-rain-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>\
+<text y='40' font-size='42' fill='%23C47A3C'>🐾</text></svg>");
+  background-size: 100px;
+  animation: pawRain 20s linear infinite;
+  opacity: 0.09;
+}
+
+@keyframes pawRain {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Parallax Paws */
+.paw-parallax-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'>\
+<text y='55' font-size='55' fill='%23b87333'>🐾</text></svg>");
+  background-size: 140px;
+  opacity: 0.07;
+  animation: pawParallax 40s linear infinite;
+}
+
+@keyframes pawParallax {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-300px, -400px, 0); }
+}
+
+/* Sparkling Paw Particles */
+.paw-sparkles-layer {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 180, 120, 0.18) 0%,
+    transparent 70%
+  );
+  background-size: 140px 140px;
+  opacity: 0.12;
+  animation: sparkleFloat 14s ease-in-out infinite alternate;
+}
+
+@keyframes sparkleFloat {
+  0%   { transform: translate(-40px, 0); }
+  100% { transform: translate(40px, -40px); }
+}
+/* Animated copper glow for Threads icon */
+.threads-icon {
+  filter: drop-shadow(0 0 6px rgba(196, 122, 60, 0.4));
+  animation: threadsGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.threads-icon:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(255, 180, 120, 0.8));
+}
+
+@keyframes threadsGlow {
+  0%   { filter: drop-shadow(0 0 6px rgba(196, 122, 60, 0.4)); }
+  50%  { filter: drop-shadow(0 0 18px rgba(255, 180, 120, 0.9)); }
+  100% { filter: drop-shadow(0 0 6px rgba(196, 122, 60, 0.4)); }
 }
